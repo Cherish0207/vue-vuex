@@ -9,6 +9,7 @@ class Store {
     // getters:写的是方法,取值是属性
     this.getters = {};
     this._mutations = {};
+    this._actions = {};
     // 通过计算属性实现懒加载
     const computed = {};
     forEach(options.getters, (fn, key) => {
@@ -19,6 +20,9 @@ class Store {
     });
     forEach(options.mutations, (fn, key) => {
       this._mutations[key] = (payload) => fn.call(this, this.state, payload);
+    });
+    forEach(options.actions, (fn, key) => {
+      this._actions[key] = (payload) => fn.call(this, this, payload);
     });
     this._vm = new Vue({
       data() {
@@ -35,6 +39,9 @@ class Store {
   }
   commit = (type, payload) => {
     this._mutations[type](payload);
+  }
+  dispatch = (type, payload) => {
+    this._actions[type](payload);
   };
 }
 // 把Vue绑定到当前作用域下
