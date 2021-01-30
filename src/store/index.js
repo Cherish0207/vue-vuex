@@ -6,9 +6,11 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     age: 10,
+    a:1
   },
   getters: {
     getAge(state) {
+      console.log('getAge');
       return state.age + 18;
     },
   },
