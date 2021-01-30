@@ -7,15 +7,18 @@ class Store {
     let state = options.state;
 
     // getters:写的是方法,取值是属性
-    let getters = options.getters;
     this.getters = {};
+    this._mutations = {};
     // 通过计算属性实现懒加载
     const computed = {};
-    forEach(getters, (fn, key) => {
+    forEach(options.getters, (fn, key) => {
       computed[key] = () => fn(this.state);
       Object.defineProperty(this.getters, key, {
         get: () => this._vm[key],
       });
+    });
+    forEach(options.mutations, (fn, key) => {
+      this._mutations[key] = (payload) => fn.call(this, this.state, payload);
     });
     this._vm = new Vue({
       data() {
@@ -30,6 +33,9 @@ class Store {
   get state() {
     return this._vm._data.$$state;
   }
+  commit = (type, payload) => {
+    this._mutations[type](payload);
+  };
 }
 // 把Vue绑定到当前作用域下
 const install = (_Vue) => {
