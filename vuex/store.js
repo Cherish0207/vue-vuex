@@ -9,9 +9,12 @@ class Store {
     // getters:写的是方法,取值是属性
     let getters = options.getters;
     this.getters = {};
+    // 通过计算属性实现懒加载
+    const computed = {};
     forEach(getters, (fn, key) => {
+      computed[key] = () => fn(this.state);
       Object.defineProperty(this.getters, key, {
-        get: () => fn(this.state),
+        get: () => this._vm[key],
       });
     });
     this._vm = new Vue({
@@ -20,6 +23,7 @@ class Store {
           $$state: state, // 内部的状态
         };
       },
+      computed,
     });
   }
   // 类的属性访间器,当用户去这个实例上去 state属性时会执行此方法
