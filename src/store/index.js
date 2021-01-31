@@ -52,6 +52,19 @@ export default new Vuex.Store({
           console.log('d update');
         }
       },
+      modules: {
+        c: {
+          namespaced: true,
+          state: {
+            e: 500
+          },
+          mutations: {
+            changeAge(state, payload) {
+              console.log('b/c update');
+            }
+          },
+        }
+      }
     }
   },
 });
