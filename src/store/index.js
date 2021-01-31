@@ -55,7 +55,6 @@ export default new Vuex.Store({
       },
       modules: {
         c: {
-          namespaced: true,
           state: {
             e: 500
           },

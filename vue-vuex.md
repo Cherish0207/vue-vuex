@@ -23,3 +23,4 @@
 2.模块内的 state 状态不要和模块的名字相同，否则取的是模块
 3.默认模块内的计算属性直接通过 $store.getters.xx 取值,不需要通过 模块名.xx
 4.如果增加 `namespaced:true`，会将这个模块的属性（state/getters/mutations/actions）都封装到这个作用域下
+5.默认会找当前模块上是否有 `namespace` ,并且将父级的 `namespace` 一同算上, 做成命名空间
