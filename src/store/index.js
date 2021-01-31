@@ -1,12 +1,11 @@
 import Vue from "vue";
-import Vuex from "../../vuex";
+import Vuex from "vuex";
 
 Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    age: 10,
-    a:1
+    age: 10
   },
   getters: {
     getAge(state) {
@@ -27,5 +26,38 @@ export default new Vuex.Store({
       }, 2000);
     },
   },
-  modules: {},
+  modules: {
+    a: {
+      state: {
+        c:100
+      },
+      mutations: {
+        changeAge(state, payload) {
+          console.log('c update');
+        }
+      }
+    },
+    b: {
+      state: {
+          d:100
+      },
+      getters: {
+        getD(state) {
+          return state.d + 100
+        }
+      },
+      mutations: {
+        changeAge(state, payload) {
+          console.log('d update');
+        }
+      },
+      modules: {
+        d: {
+          state: {
+            e: 100
+          }
+        }
+      }
+    }
+  },
 });
