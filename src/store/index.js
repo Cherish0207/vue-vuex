@@ -39,6 +39,7 @@ export default new Vuex.Store({
       }
     },
     b: {
+      namespaced: true,
       state: {
           d:100
       },
