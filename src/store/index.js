@@ -28,6 +28,7 @@ export default new Vuex.Store({
   },
   modules: {
     a: {
+      namespaced: true,
       state: {
         c:100
       },
@@ -51,13 +52,6 @@ export default new Vuex.Store({
           console.log('d update');
         }
       },
-      modules: {
-        d: {
-          state: {
-            e: 100
-          }
-        }
-      }
     }
   },
 });

@@ -22,3 +22,4 @@
 1.默认模块没有作用域问题 
 2.模块内的 state 状态不要和模块的名字相同，否则取的是模块
 3.默认模块内的计算属性直接通过 $store.getters.xx 取值,不需要通过 模块名.xx
+4.如果增加 `namespaced:true`，会将这个模块的属性（state/getters/mutations/actions）都封装到这个作用域下
